@@ -266,6 +266,7 @@ public class MainActivity extends ActionBarActivity {
         t = (TextView) findViewById(R.id.tv);
         t.setText(id);
     }
+
     public void authButton(View view) {
         new Approve().execute();
     }
