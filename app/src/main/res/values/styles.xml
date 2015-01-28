@@ -5,4 +5,47 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="TransparentTheme" parent="@style/Theme.AppCompat.Light">
+        <!--<item name="android:windowBackground">@null</item>-->
+        <item name="android:actionBarStyle">@style/ActionBarStyle.Transparent</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:actionMenuTextColor">@android:color/white</item>
+
+        <item name="android:icon">@drawable/menu_button_black</item>
+        <item name="android:logo">@drawable/menu_button_black</item>
+
+        <!-- Support Library compatibility -->
+        <item name="actionBarStyle">@style/ActionBarStyle.Transparent</item>
+        <item name="windowActionBarOverlay">true</item>
+        <!--<item name="actionMenuTextColor">@color/ActionBarText</item>-->
+    </style>
+
+    <style name="ActionBarStyle.Transparent" parent="@style/Widget.AppCompat.Light.ActionBar">
+        <item name="android:icon">@drawable/menu_button_black</item>
+        <item name="android:logo">@drawable/menu_button_black</item>
+
+        <item name="android:background">@null</item>
+        <item name="android:displayOptions">showHome|useLogo</item>
+        <item name="displayOptions">showHome|useLogo</item>
+
+        <item name="android:titleTextStyle">@style/ActionBarStyle.None.TitleTextStyle</item>
+        <!--
+        <item name="android:displayOptions">showHome|useTitle</item>
+        -->
+    </style>
+
+    <style name="ActionBarStyle.None.TitleTextStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <!--
+
+        <item name="android:textSize">0sp</item>
+        <item name="android:textColor">#00000000</item>
+
+        -->
+    </style>
+
+    <style name="ActionBarStyle.Transparent.TitleTextStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+
+        <item name="android:textColor">#00000000</item>
+    </style>
+
 </resources>

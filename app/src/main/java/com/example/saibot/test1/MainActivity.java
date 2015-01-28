@@ -37,7 +37,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 
-
+import android.content.Intent;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -259,6 +259,18 @@ public class MainActivity extends ActionBarActivity {
         return uuids;
     }
     // Boilerplate code from the activity creation:
+
+    public void goViewTwo(View view) {
+        Log.d("okey", "view two!");
+
+        Intent intent = new Intent(this, CurrentLocationActivity.class);
+        //EditText editText = (EditText) findViewById(R.id.edit_message);
+        String message = "hi";
+        //intent.putExtra(EXTRA_MESSAGE, message);
+
+        startActivity(intent);
+    }
+
     public void sendMessage(View view) {
         TextView t = new TextView(this);
         EditText UserID = (EditText)findViewById(R.id.UserID);

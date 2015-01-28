@@ -4,5 +4,9 @@
     <string name="app_name">Test1</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_current_location">Current Location Activity</string>
+    <string name="title_activity_logs">Logs Activity</string>
+    <string name="title_activity_dashboard">Dashboard Activity</string>
+    <string name="title_activity_home">Home Activity</string>
 
 </resources>

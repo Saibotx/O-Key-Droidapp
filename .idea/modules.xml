@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/app/O-Key Android Backend one device.iml" filepath="$PROJECT_DIR$/app/O-Key Android Backend one device.iml" />
+      <module fileurl="file://$PROJECT_DIR$/O-Key-Droidapp.iml" filepath="$PROJECT_DIR$/O-Key-Droidapp.iml" />
       <module fileurl="file://$PROJECT_DIR$/Test1.iml" filepath="$PROJECT_DIR$/Test1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
 </project>
