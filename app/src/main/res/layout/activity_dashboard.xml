@@ -1,0 +1,107 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.saibot.test1.DashboardActivity"
+    android:padding="0dp" >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="900dp"
+        android:id="@+id/dashboard_background"
+        android:src="@drawable/dashbaord"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:scaleType="centerCrop"
+        android:layout_marginBottom="-80dp" />
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:padding="10dp"
+        android:background="@null"
+        android:scaleType="centerCrop"
+        android:id="@+id/menuButton"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:onClick="menu_clicked" />
+
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="230dp"
+        android:layout_marginTop="170dp"
+        android:layout_marginLeft="0dp"
+        android:background="@null"
+        android:scaleType="centerCrop"
+        android:id="@+id/go_home_button"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:onClick="go_home" />
+
+    <!--
+        android:gravity="bottom"
+        android:scaleType="centerCrop"
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_horizontal"
+        android:id="@+id/cl_logo"
+        android:src="@drawable/logo_black"
+        android:layout_alignParentTop="true"
+        android:layout_below="@+id/current_location_header"
+        android:layout_alignStart="@+id/current_location_header"
+        android:layout_marginTop="10dp"/>
+
+    <ImageButton
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginRight="13dp"
+        android:background="@null"
+        android:scaleType="centerCrop"
+        android:id="@+id/settingsButton"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/settings_black"/>
+
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:padding="10dp"
+        android:background="@null"
+        android:scaleType="centerCrop"
+        android:id="@+id/menuButton"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/menu_button_black"/>
+
+        -->
+    <FrameLayout
+        android:layout_marginLeft="-283dp"
+        android:layout_width="283dp"
+        android:layout_height="fill_parent"
+        android:id="@+id/menuLayout">
+
+        <ImageView
+            android:layout_width="283dp"
+            android:layout_height="fill_parent"
+            android:id="@+id/menuView"
+            android:src="@drawable/menu_smal"/>
+
+        <Button
+            android:layout_width="45dp"
+            android:layout_height="40dp"
+            android:text=""
+            android:id="@+id/menu_menu_button"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:background="@null"
+            android:onClick="menu_toggle"
+            android:layout_gravity="right" />
+    </FrameLayout>
+
+</RelativeLayout>
