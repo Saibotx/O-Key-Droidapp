@@ -17,6 +17,7 @@
     <android:uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
+
     <!--
     <android:uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
@@ -71,6 +72,18 @@
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/TransparentTheme" >
+        </activity>
+        <activity
+            android:name=".Manage"
+            android:label="@string/title_activity_manage" >
+        </activity>
+        <activity
+            android:name=".RfidKeysControl"
+            android:label="@string/title_activity_rfid_keys_control"
+            android:parentActivityName=".Manage" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.saibot.test1.Manage" />
         </activity>
     </application>
 

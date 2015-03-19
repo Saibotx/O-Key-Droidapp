@@ -8,5 +8,7 @@
     <string name="title_activity_logs">Logs Activity</string>
     <string name="title_activity_dashboard">Dashboard Activity</string>
     <string name="title_activity_home">Home Activity</string>
+    <string name="title_activity_manage">Manage</string>
+    <string name="title_activity_rfid_keys_control">RfidKeysControl</string>
 
 </resources>

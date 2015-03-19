@@ -42,10 +42,11 @@
         android:layout_width="315dp"
         android:layout_height="400dp"
         android:text=""
-        android:id="@+id/textView"
-        android:layout_marginTop="200dp"
+        android:id="@+id/logView"
         android:layout_marginLeft="22dp"
-        android:background="#ffffff"/>
+        android:background="#ffffff"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
     <FrameLayout
         android:layout_marginLeft="-283dp"

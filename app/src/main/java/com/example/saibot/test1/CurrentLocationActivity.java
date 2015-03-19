@@ -109,4 +109,10 @@ public class CurrentLocationActivity extends Activity {
         Intent intent = new Intent(this, DashboardActivity.class);
         startActivity(intent);
     }
+    public void go_manage(View view) {
+        Log.d("go_manage", "Click from go_dashboard function");
+
+        Intent intent = new Intent(this, Manage.class);
+        startActivity(intent);
+    }
 }

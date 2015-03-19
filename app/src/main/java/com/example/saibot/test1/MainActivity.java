@@ -160,8 +160,8 @@ public class MainActivity extends ActionBarActivity {
         super.onResume();
         // Scan for all BTLE devices.
         // The first one with the UART service will be chosen--see the code in the scanCallback.
-        writeLine("Scanning for devices...");
-        adapter.startLeScan(scanCallback);
+        //writeLine("Scanning for devices...");
+        //adapter.startLeScan(scanCallback);
     }
 
     // OnStop, called right before the activity loses foreground focus.  Close the BTLE connection.
