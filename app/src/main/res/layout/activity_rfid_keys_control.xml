@@ -6,6 +6,24 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.example.saibot.test1.RfidKeysControl">
 
+    <ScrollView
+        android:layout_width="315dp"
+        android:layout_height="100dp"
+        android:id="@+id/scrollView"
+        android:layout_below="@+id/menuButton"
+        android:layout_marginLeft="18dp" >
+
+        <TextView
+            android:text=""
+            android:id="@+id/keyView"
+            android:layout_marginLeft="22dp"
+            android:background="#ffffff"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom" />
+
+    </ScrollView>
+
     <Button
         android:layout_width="50dp"
         android:layout_height="40dp"
@@ -31,22 +49,17 @@
     <!--android:layout_alignParentStart="true"-->
     <!--android:onClick="logs_clicked" />-->
 
-    <TextView
-        android:layout_width="315dp"
-        android:layout_height="100dp"
-        android:text=""
-        android:id="@+id/keyView"
-        android:layout_marginLeft="22dp"
-        android:background="#ffffff"
-        android:layout_below="@+id/menuButton" />
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"></FrameLayout>
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/editText"
-        android:layout_below="@+id/keyView"
-        android:layout_alignStart="@+id/keyView"
-        android:layout_alignEnd="@+id/keyView" />
+        android:layout_below="@+id/scrollView"
+        android:layout_alignStart="@+id/scrollView"
+        android:layout_alignEnd="@+id/scrollView" />
 
     <Button
         android:layout_width="wrap_content"
@@ -91,11 +104,12 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="BTConn"
-        android:id="@+id/BTConn"
+        android:text="BTStop"
+        android:id="@+id/BTstop"
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/remove"
-        android:layout_toStartOf="@+id/pullServer" />
+        android:layout_toStartOf="@+id/pullServer"
+        android:onClick="BTstop" />
 
     <Button
         style="?android:attr/buttonStyleSmall"

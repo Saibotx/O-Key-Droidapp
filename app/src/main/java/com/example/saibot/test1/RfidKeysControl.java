@@ -3,19 +3,25 @@ package com.example.saibot.test1;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothManager;
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCallback;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattDescriptor;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.os.Handler;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -26,6 +32,7 @@ import java.nio.ByteOrder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
 
 
 public class RfidKeysControl extends Activity {
@@ -43,11 +50,14 @@ public class RfidKeysControl extends Activity {
 
     // BTLE state
     private BluetoothAdapter adapter;
+
     private BluetoothGatt gatt;
     private BluetoothGattCharacteristic tx;
     private BluetoothGattCharacteristic rx;
     private boolean mConnected = false;
-
+    private boolean Scanning = false;
+    private LeDeviceListAdapter mLeDeviceListAdapter;
+    private Handler mHandler;
     // Main BTLE device callback where much of the logic occurs.
     private BluetoothGattCallback callback = new BluetoothGattCallback() {
         // Called whenever the device connection state changes, i.e. from disconnected to connected.
@@ -117,19 +127,74 @@ public class RfidKeysControl extends Activity {
     private BluetoothAdapter.LeScanCallback scanCallback = new BluetoothAdapter.LeScanCallback() {
         // Called when a device is found.
         @Override
-        public void onLeScan(BluetoothDevice bluetoothDevice, int i, byte[] bytes) {
-            writeLine("Found device: " + bluetoothDevice.getAddress());
-            // Check if the device has the UART service.
-            if (parseUUIDs(bytes).contains(UART_UUID)) {
-                // Found a device, stop the scan.
-                adapter.stopLeScan(scanCallback);
-                writeLine("Found UART service!");
-                // Connect to the device.
-                // Control flow will now go to the callback functions when BTLE events occur.
-                gatt = bluetoothDevice.connectGatt(getApplicationContext(), false, callback);
-            }
+        public void onLeScan(final BluetoothDevice device, int rssi, byte[] scanRecord) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    mLeDeviceListAdapter.addDevice(device);
+
+                }
+            });
         }
     };
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Ensures Bluetooth is enabled on the device.  If Bluetooth is not currently enabled,
+        // fire an intent to display a dialog asking the user to grant permission to enable it.
+        // Initializes list view adapter.
+        mLeDeviceListAdapter = new LeDeviceListAdapter();
+
+    }
+
+    private class LeDeviceListAdapter {
+        private ArrayList<BluetoothDevice> mLeDevices;
+        private LayoutInflater mInflator;
+        public LeDeviceListAdapter() {
+            super();
+            mLeDevices = new ArrayList<BluetoothDevice>();
+            mInflator = RfidKeysControl.this.getLayoutInflater();
+        }
+        public void addDevice(BluetoothDevice device) {
+            if(!mLeDevices.contains(device)) {
+                mLeDevices.add(device);
+            }
+        }
+        public BluetoothDevice getDevice(int position) {
+            return mLeDevices.get(position);
+        }
+        public void clear() {
+            mLeDevices.clear();
+        }
+        public int getCount() {
+            return mLeDevices.size();
+        }
+
+        public Object getItem(int i) {
+            return mLeDevices.get(i);
+        }
+
+        public long getItemId(int i) {
+            return i;
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     private void writeLine(final CharSequence text) {
         runOnUiThread(new Runnable() {
             @Override
@@ -193,8 +258,10 @@ public class RfidKeysControl extends Activity {
     }
 
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mHandler = new Handler();
         setContentView(R.layout.activity_rfid_keys_control);
         keyView = (TextView) findViewById(R.id.keyView);
         input = (EditText) findViewById(R.id.editText);
@@ -220,23 +287,36 @@ public class RfidKeysControl extends Activity {
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+    public void BTScan(View view) {
+
+        if (!Scanning) {
+            // Stops scanning after a pre-defined scan period.
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Scanning = false;
+                    adapter.stopLeScan(scanCallback);
+
+                    Log.d("mydubg", "stoppedFromScan_Period");
+                    mLeDeviceListAdapter.checkEach();
+                    invalidateOptionsMenu();
+                }
+            }, 100); //1 second of scanning
+
+            Scanning = true;
+            adapter.startLeScan(scanCallback);
+        } else {
+            Scanning = false;
+            adapter.stopLeScan(scanCallback);
         }
-
-        return super.onOptionsItemSelected(item);
     }
-    public void BTScan(View view){
-        writeLine("Scanning for devices...");
-        adapter.startLeScan(scanCallback);
+
+
+
+    public void BTstop(View view) {
+        adapter.stopLeScan(scanCallback);
+        writeLine("Stopping Bluetooth Scan");
     }
     public void AddButton(View view){
         new AddRFID().execute();
