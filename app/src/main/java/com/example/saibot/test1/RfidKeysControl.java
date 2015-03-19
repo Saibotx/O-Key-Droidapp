@@ -30,6 +30,7 @@ import java.net.URLConnection;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -149,8 +150,23 @@ public class RfidKeysControl extends Activity {
     }
 
     private class LeDeviceListAdapter {
-        private ArrayList<BluetoothDevice> mLeDevices;
         private LayoutInflater mInflator;
+        private ArrayList<BluetoothDevice> mLeDevices;
+        private HashMap<BluetoothDevice, Integer> rssiMap = new HashMap<BluetoothDevice, Integer>();
+        public void checkEach(){
+
+            int dist = -65;
+            for (BluetoothDevice s : mLeDevices) {
+                writeLine("Checking" + s.getName());
+                if (s.getName().indexOf("Sof") != -1 ) {
+                    //connect to this bitch
+                    writeLine("Connecting to" + s.getName());
+                    adapter.stopLeScan(scanCallback);
+                    autoConnect(s);
+                    break;
+                }
+            }
+        }
         public LeDeviceListAdapter() {
             super();
             mLeDevices = new ArrayList<BluetoothDevice>();
@@ -190,7 +206,18 @@ public class RfidKeysControl extends Activity {
 
 
 
+    private void autoConnect(BluetoothDevice device) {
 
+
+
+        if (Scanning) {
+            adapter.stopLeScan(scanCallback);
+            Scanning = false;
+        }
+        gatt = device.connectGatt(getApplicationContext(), false, callback);
+        writeLine("connecting");
+
+    }
 
 
 
@@ -290,6 +317,7 @@ public class RfidKeysControl extends Activity {
 
     public void BTScan(View view) {
 
+
         if (!Scanning) {
             // Stops scanning after a pre-defined scan period.
             mHandler.postDelayed(new Runnable() {
@@ -302,12 +330,14 @@ public class RfidKeysControl extends Activity {
                     mLeDeviceListAdapter.checkEach();
                     invalidateOptionsMenu();
                 }
-            }, 100); //1 second of scanning
+            }, 2000); //1 second of scanning
 
             Scanning = true;
+            writeLine("Scanning...");
             adapter.startLeScan(scanCallback);
         } else {
             Scanning = false;
+            writeLine("Stop Scanning");
             adapter.stopLeScan(scanCallback);
         }
     }
@@ -316,6 +346,7 @@ public class RfidKeysControl extends Activity {
 
     public void BTstop(View view) {
         adapter.stopLeScan(scanCallback);
+        Scanning = false;
         writeLine("Stopping Bluetooth Scan");
     }
     public void AddButton(View view){
