@@ -27,10 +27,24 @@ public class LogsActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logs);
-        new getLogs().execute();
+
 
         //TextView text_view = (TextView) findViewById(R.id.textView);
         //text_view.setBackgroundColor(@android:color/white);
+    }
+
+
+    protected void onResume() {
+        super.onResume();
+        // Scan for all BTLE devices.
+        // The first one with the UART service will be chosen--see the code in the scanCallback.
+        //writeLine("Scanning for devices...");
+        //adapter.startLeScan(scanCallback);
+        new getLogs().execute();
+        Log.w("Debug", "Getting logs");
+        TextView t;
+        t = (TextView) findViewById(R.id.logView);
+        t.setText("Loading Logs... Please wait");
     }
 
     public void toggleMenu() {
