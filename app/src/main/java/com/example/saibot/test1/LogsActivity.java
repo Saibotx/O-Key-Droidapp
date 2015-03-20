@@ -19,9 +19,14 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class LogsActivity extends Activity {
+
+    private Timer autoUpdate;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +50,18 @@ public class LogsActivity extends Activity {
         TextView t;
         t = (TextView) findViewById(R.id.logView);
         t.setText("Loading Logs... Please wait");
+        autoUpdate = new Timer();
+        autoUpdate.schedule(new TimerTask() {
+            @Override
+        public void run() {
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        new getLogs().execute();
+                    }
+
+                });
+            }
+        }, 0, 1000);
     }
 
     public void toggleMenu() {
