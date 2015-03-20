@@ -38,6 +38,16 @@
         <!--android:layout_alignParentStart="true"-->
         <!--android:onClick="logs_clicked" />-->
 
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Clear Logs"
+        android:id="@+id/ClearLogs"
+        android:layout_alignBottom="@+id/logView"
+        android:layout_alignEnd="@+id/logView"
+        android:onClick="ClearLogs" />
+
     <TextView
         android:layout_width="315dp"
         android:layout_height="400dp"
