@@ -64,6 +64,17 @@ public class LogsActivity extends Activity {
         }, 0, 1000);
     }
 
+    protected void onPause() {
+        super.onPause();
+        autoUpdate.cancel();
+        // Scan for all BTLE devices.
+        // The first one with the UART service will be chosen--see the code in the scanCallback.
+        //writeLine("Scanning for devices...");
+        //adapter.startLeScan(scanCallback);
+
+    }
+
+
     public void toggleMenu() {
         // *** NOTE! The animation below is not working, only the onAnimationEnd function
         final FrameLayout menuLayout = (FrameLayout) findViewById(R.id.menuLayout);
@@ -152,8 +163,8 @@ public class LogsActivity extends Activity {
                 // TODO Auto-generated method stub
                 TextView t;
 
-                t = (TextView) findViewById(R.id.tv);
-                t.setText(sb);
+                t = (TextView) findViewById(R.id.logView);
+                t.setText("Logs Cleared");
             }
         });
     }
