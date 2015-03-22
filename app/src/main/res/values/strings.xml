@@ -10,5 +10,6 @@
     <string name="title_activity_home">Home Activity</string>
     <string name="title_activity_manage">Manage</string>
     <string name="title_activity_rfid_keys_control">RfidKeysControl</string>
+    <string name="title_activity_permissions">Permissions</string>
 
 </resources>

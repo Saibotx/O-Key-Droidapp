@@ -13,6 +13,7 @@
     <android:uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <android:uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
@@ -84,6 +85,10 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.saibot.test1.Manage" />
+        </activity>
+        <activity
+            android:name=".Permissions"
+            android:label="@string/title_activity_permissions" >
         </activity>
     </application>
 

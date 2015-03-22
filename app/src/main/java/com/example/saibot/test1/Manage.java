@@ -40,6 +40,11 @@ public class Manage extends Activity {
         startActivity(intent);
     }
     public void go_Guests(View view) {
+
+        Log.d("go_Guests", "Click from manage function");
+
+        Intent intent = new Intent(this, Permissions.class);
+        startActivity(intent);
         //do nothing yet
     }
 /*
